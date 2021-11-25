@@ -1,0 +1,20 @@
+1.@Resource的作用相当于@Autowired，只不过@Autowired按byType自动注入，而@Resource默认按 byName自动注入罢了。
+	@Resource有两个属性是比较重要的，分是name和type，Spring将@Resource注解的name属性解析为bean的名字，
+	而type属性则解析为bean的类型。所以如果使用name属性，则使用byName的自动注入策略，
+	而使用type属性时则使用byType自动注入策略。
+	如果既不指定name也不指定type属性，这时将通过反射机制使用byName自动注入策略。
+
+2.@Autowired时，首先在容器中查询对应类型的bean
+　　　　如果查询结果刚好为一个，就将该bean装配给@Autowired指定的数据
+　　　　如果查询的结果不止一个，那么@Autowired会根据名称来查找。
+　　　　如果查询的结果为空，那么会抛出异常。解决方法时，使用required=false
+
+3.@Value: 简单类型的属性赋值
+              属性： value 是String类型的，表示简单类型的属性值
+               位置： 1.在属性定义的上面，无需set方法，推荐使用。
+  	           2.在set方法的上面
+
+Spring @Qualifier 注解
+
+可能会有这样一种情况，当你创建多个具有相同类型的 bean 时，并且想要用一个属性只为它们其中的一个进行装配，
+在这种情况下，你可以使用 @Qualifier 注解和 @Autowired 注解通过指定哪一个真正的 bean 将会被装配来消除混乱
